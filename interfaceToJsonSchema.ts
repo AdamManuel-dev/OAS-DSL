@@ -31,7 +31,9 @@ export const addSchema = (name: string, ...paths: any) => {
   const Schema = TJS.generateSchema(program, name);
 
   if (!Schema) {
-    throw new Error(`Failed to generate ${name} schema from ${path}`);
+    throw new Error(
+      `Failed to generate ${name} schema from ${paths.join("|")}`
+    );
   }
 
   builder.addSchema(name, jsonSchemaToOpenApi(Schema));
@@ -55,7 +57,9 @@ export const addRequestBody = (
   const Schema = TJS.generateSchema(program, name);
 
   if (!Schema) {
-    throw new Error(`Failed to generate ${name} schema from ${paths}`);
+    throw new Error(
+      `Failed to generate ${name} schema from ${paths.join("|")}`
+    );
   }
 
   builder.addRequestBody(
