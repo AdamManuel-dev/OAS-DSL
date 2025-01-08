@@ -1,10 +1,4 @@
-import {
-  ContentObject,
-  MediaTypeObject,
-  ReferenceObject,
-  ResponseObject,
-  ResponsesObject,
-} from "openapi3-ts/oas31";
+import { MediaTypeObject, ResponseObject } from "openapi3-ts/oas31";
 import { builder } from "./baseOpenAPI";
 import { RequestBodyRef, ResponseRef, SchemaRef } from "./referenceBuilder";
 import "./addDog";
