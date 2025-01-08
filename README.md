@@ -1,7 +1,3 @@
-Certainly! I'll create a README.md file that explains how this project demonstrates building OpenAPI specifications through separated definitions across the codebase. Here's the content for the README:
-
-**File: /Users/adammanuel/Projects/OpenApiDSL/README.md**
-```markdown
 # OpenAPI DSL (Domain-Specific Language)
 
 This project demonstrates an approach to building OpenAPI specifications through separated definitions across the codebase. It provides a flexible and maintainable way to define API schemas, endpoints, and other OpenAPI components using TypeScript.
