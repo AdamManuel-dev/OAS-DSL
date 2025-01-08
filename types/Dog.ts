@@ -8,11 +8,11 @@ export interface Dog {
    */
   size: number;
   /**
-   * @example "Labrador Retriever"
    * @TJS-type string
    * @pattern ^[A-Za-z\s]+$
    * @minLength 1
    * @maxLength 100
+   * @example "Labrador Retriever"
    */
   breed: string;
 }
