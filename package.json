@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "generate:openapi": "ts-node ./OpenAPI.ts > OpenAPISpec.yaml"
+    "generate:openapi": "ts-node ./OpenAPI.ts > FullOpenAPISpec.yaml && grep -v ': {}$' FullOpenAPISpec.yaml > OpenAPISpec.yaml"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "email": "adam@manuel.dev",
+    "name": "Adam Manuel",
+    "url": "https://adam.manuel.dev"
+ },
   "license": "ISC",
   "description": "",
   "devDependencies": {

@@ -1,9 +1,17 @@
+import {
+  ContentObject,
+  MediaTypeObject,
+  ReferenceObject,
+  ResponseObject,
+  ResponsesObject,
+} from "openapi3-ts/oas31";
 import { builder } from "./baseOpenAPI";
-import { requestBodyRef, responseRef } from "./referenceBuilder";
+import { RequestBodyRef, ResponseRef, SchemaRef } from "./referenceBuilder";
 import "./addDog";
 import "./addPet";
 
 builder
+  .addTag({ name: "pet", description: "Operations about pets" })
   .addPath("/pet", {
     get: {
       tags: ["pet"],
@@ -11,9 +19,9 @@ builder
       description: "Returns a single pet",
       operationId: "getPetById",
       responses: {
-        200: {
-          $ref: responseRef`Created`,
-        },
+        200: ResponseRef`Created${{
+          summary: "Pet",
+        }}`,
       },
     },
     post: {
@@ -21,24 +29,31 @@ builder
       summary: "Update pet by ID",
       description: "Updated a single pet",
       operationId: "updatePetById",
-      requestBody: {
-        $ref: requestBodyRef`CreatePet`,
-      },
+      requestBody: RequestBodyRef`CreatePet`,
       responses: {
-        200: {
-          $ref: responseRef`Updated`,
-        },
-        400: {
-          $ref: responseRef`InvalidInput`,
+        200: ResponseRef`Updated`,
+        400: <ResponseObject>{
+          description: "Invalid ID supplied",
+          content: {
+            "application/json": <MediaTypeObject>{
+              schema: SchemaRef`Dog`,
+              example: {
+                size: 12,
+                breed: "Labrador Retriever",
+              },
+            },
+          },
         },
       },
     },
   })
   .addResponse("Created", {
     description: "Object created",
+    summary: "Create",
   })
   .addResponse("Updated", {
     description: "Object updated",
+    summary: "Update",
   })
   .addParameter("petId", {
     name: "id",

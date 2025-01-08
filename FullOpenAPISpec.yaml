@@ -79,6 +79,7 @@ components:
       in: header
       schema:
         type: string
+  examples: {}
   requestBodies:
     CreatePet:
       content:
@@ -92,6 +93,10 @@ components:
                 minLength: 1
                 maxLength: 100
       description: Create a new pet
+  headers: {}
+  securitySchemes: {}
+  links: {}
+  callbacks: {}
 tags:
   - name: pet
     description: Operations about pets
