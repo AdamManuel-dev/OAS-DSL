@@ -1,3 +1,3 @@
-import { addSchema } from "./addSchema";
+import { addSchema } from "./interfaceToJsonSchema";
 
 addSchema("Dog", "./types/Dog.ts");

@@ -14,9 +14,9 @@ const jsonSchemaToOpenApi = (schema: TJS.Definition) => ({
 export const addSchema = (name: string, path: any) => {
   const program = TJS.getProgramFromFiles(
     [resolve(path)],
-    {
+    <TJS.CompilerOptions>{
       strictNullChecks: true,
-    } as TJS.CompilerOptions,
+    },
     "./"
   );
 
@@ -32,9 +32,9 @@ export const addSchema = (name: string, path: any) => {
 export const addRequestBody = (name: string, path: any, newName?: string) => {
   const program = TJS.getProgramFromFiles(
     [resolve(path)],
-    {
+    <TJS.CompilerOptions>{
       strictNullChecks: true,
-    } as TJS.CompilerOptions,
+    },
     "./"
   );
 
