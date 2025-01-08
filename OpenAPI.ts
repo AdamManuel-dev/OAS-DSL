@@ -1,6 +1,11 @@
 import { MediaTypeObject, ResponseObject } from "openapi3-ts/oas31";
 import { builder } from "./baseOpenAPI";
 import { RequestBodyRef, ResponseRef, SchemaRef } from "./referenceBuilder";
+
+/**
+ * Automatically adds a schema to the OpenAPI specification just from importing
+ * Becomes available within OpenAPIDoc by the next line after the import
+ */
 import "./addDog";
 import "./addPet";
 
@@ -57,4 +62,13 @@ builder
     },
   });
 
+/**
+ * Validates the OpenAPI document using additional requirements,
+ * like presence of examples for each schema definition
+ */
+import "./validate";
+
+/**
+ * Outputs the OpenAPI document as YAML to STDOUT which is piped into FullOpenAPISpec.yaml
+ */
 console.log(builder.getSpecAsYaml());
