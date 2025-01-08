@@ -23,10 +23,7 @@ export const jsonSchemaToOpenApi = (schema: TJS.Definition) => ({
  * Add a schemma to the OpenAPI specification
  */
 export const addSchema = (name: string, ...paths: any) => {
-  const program = TJS.getProgramFromFiles(
-    paths.map((path: string) => resolve(path)),
-    basicTsConfig
-  );
+  const program = TJS.getProgramFromFiles(paths.map((_) => resolve(_))), basicTsConfig);
 
   const Schema = TJS.generateSchema(program, name);
 
@@ -49,10 +46,7 @@ export const addRequestBody = (
   newName?: string,
   ...paths: any
 ) => {
-  const program = TJS.getProgramFromFiles(
-    paths.map((path: string) => resolve(path)),
-    basicTsConfig
-  );
+  const program = TJS.getProgramFromFiles(paths.map((_) => resolve(_)), basicTsConfig);
 
   const Schema = TJS.generateSchema(program, name);
 
