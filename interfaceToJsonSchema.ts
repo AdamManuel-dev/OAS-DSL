@@ -17,6 +17,8 @@ export const jsonSchemaToOpenApi = (schema: TJS.Definition) => ({
     [propertyName: string]: ReferenceObject | SchemaObject;
   },
   required: schema.required,
+  example: (schema as any).example,
+  description: schema.description,
 });
 
 /**
@@ -41,12 +43,15 @@ export const addSchema = (name: string, ...paths: string[]) => {
 
 /**
  * Add a request body schema to the OpenAPI specification
- * If newName is provided, it will be used as the name in the OpenAPI specification
- * If newName is not provided, it will be the same as the name in the TypeScript file
+ * @param typeName - The TypeScript type/interface name to generate the schema from
+ * @param requestBodyName - The name to use in the OpenAPI components/requestBodies section
+ * @param description - Description for the request body
+ * @param paths - File paths containing the TypeScript type definition
  */
 export const addRequestBody = (
-  name: string,
-  newName?: string,
+  typeName: string,
+  requestBodyName: string,
+  description: string,
   ...paths: string[]
 ) => {
   const program = TJS.getProgramFromFiles(
@@ -54,23 +59,20 @@ export const addRequestBody = (
     basicTsConfig
   );
 
-  const Schema = TJS.generateSchema(program, name);
+  const Schema = TJS.generateSchema(program, typeName);
 
   if (!Schema) {
     throw new Error(
-      `Failed to generate ${name} schema from ${paths.join("|")}`
+      `Failed to generate ${typeName} schema from ${paths.join("|")}`
     );
   }
 
-  builder.addRequestBody(
-    newName?.includes("/") || newName?.includes(".") ? newName : name,
-    {
-      content: {
-        "application/json": {
-          schema: jsonSchemaToOpenApi(Schema),
-        },
+  builder.addRequestBody(requestBodyName, {
+    content: {
+      "application/json": {
+        schema: jsonSchemaToOpenApi(Schema),
       },
-      description: "Create a new pet",
-    }
-  );
+    },
+    description,
+  });
 };

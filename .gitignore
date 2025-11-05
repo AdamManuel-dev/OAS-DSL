@@ -1,1 +1,6 @@
 node_modules/*
+*.yaml
+OpenAPISpec.yaml
+FullOpenAPISpec.yaml
+coverage/
+*.log

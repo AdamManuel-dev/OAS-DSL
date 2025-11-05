@@ -1,3 +1,6 @@
+/**
+ * @example {"size": 50, "breed": "Golden Retriever"}
+ */
 export interface Dog {
   /**
    * The size of the shape.
